@@ -171,6 +171,38 @@ void printPrimes(ll e, vll &v){
      }
 }
 
+bool isOdd(ll n){
+     return n&1;
+}
+
+//LD refers to Linear Diphantine
+class ExtEuclid{
+     public:
+     ll gLD;
+     ll xLD;
+     ll yLD;
+};
+
+ExtEuclid gcdLinearDiphantine(ll a, ll b){
+     //base case
+     if(b==0){
+          ExtEuclid base;
+          base.gLD = a;
+          base.xLD = 1;
+          base.yLD = 0;
+          return base;
+     }
+
+     ExtEuclid temp = gcdLinearDiphantine(b,a%b);
+     ExtEuclid ans;
+     ans.gLD = temp.gLD;
+     ans.xLD = temp.yLD;
+     ans.yLD = temp.xLD - ((a/b)*temp.yLD);
+
+     return ans;
+}
+
+
 bool allsame(vll &v){
 	for(int i=1; i<v.size(); i++){
 		if(v[i]!=v[i-1]){return false;}
@@ -194,10 +226,19 @@ int fibo(int dp[], int n){
      return dp[n]=fibo(dp,n-1)+fibo(dp,n-2);
 }
 
-ll gcd(ll a, ll  b){
-     if(b==0){return a;}
-     return gcd(b,a%b);
+
+ll modularExpo(ll a, ll b, ll c){
+     if(b==0){return 1;}
+     if(b%2==0){
+          ll temp = modularExpo(a, b/2 , c);
+          return (temp%c * temp%c)%c;
+     }
+     else{
+          ll temp = modularExpo(a, b/2, c);
+          return (a%c * temp%c * temp%c)%c;
+     }
 }
+
 
 ll lcm(ll a, ll b){
      ll g = gcd(a,b);
@@ -218,7 +259,7 @@ int main(){
 	clock_t z = clock();
 	//code starts
 	int t=1;
-	cin>>t;
+	//cin>>t;
 	while(t--)solve();
 	//code ends
 	cerr<<"Run Time: "<<((double)(clock()-z)/CLOCKS_PER_SEC);
