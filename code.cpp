@@ -74,17 +74,6 @@ public:
      }
 };
 
-bool isPrime(int &n) {
-
-    if (n < 2) { return false; }
-    if (n == 2) { return true; }
-
-    for (int i=2; i <= n / 2; ++i)
-        if (n % i == 0)
-            return false;
-
-    return true;
-}
 
 bool sorted(vi &v){
 	for(int i=1; i<v.size(); i++){
@@ -226,6 +215,15 @@ int fibo(int dp[], int n){
      return dp[n]=fibo(dp,n-1)+fibo(dp,n-2);
 }
 
+bool isPrime(int n){
+    if(n<2) return false;
+    if(n==2) return true;
+    for(int i=2;i*i<=n;i++){
+        if(n%i==0)
+            return false;
+    }
+    return true;
+}
 
 ll modularExpo(ll a, ll b, ll c){
      if(b==0){return 1;}
@@ -239,10 +237,44 @@ ll modularExpo(ll a, ll b, ll c){
      }
 }
 
+int div(int n){
+    for(int i=2;i*i<=n;i++){
+        if(n%i==0)
+            return i;
+    }
+    return n;
+}
 
 ll lcm(ll a, ll b){
      ll g = gcd(a,b);
      return (a*b)/g;
+}
+
+ll kadane(vll &v){
+     int best = INT_MIN;
+     int sum = 0;
+     for(int i=0; i<v.size(); i++){
+          sum= max(sum+v[i],v[i]);
+          best=max(best,sum);
+     }
+
+     return best;
+}
+
+void prefixSum(vll &v, vll &prefix){
+     prefix[0]=0;
+     for(int i=1; i<=v.size(); i++){
+          prefix[i]=prefix[i-1]+v[i-1];
+     }
+     return ;
+}
+
+ll pwr(ll x){
+     ll crnt = 2;
+     while(crnt<=x){
+          crnt*=2;
+     }
+     return crnt;
 }
 
 void solve(){
