@@ -74,6 +74,15 @@ public:
      }
 };
 
+void spff(int n) { // O(Nlog(logN)) ~ O(N)
+        spf.resize(n);
+        for (int i = 2; i < n; ++i) spf[i] = i;
+        for (int i = 2; i * i < n; i++) {
+            if (spf[i] != i) continue; // skip if `i` is not a prime number
+            for (int j = i * i; j < n; j += i)
+                if (spf[j] > i) spf[j] = i; // update to the smallest prime factor of j
+        }
+    }
 
 bool sorted(vi &v){
 	for(int i=1; i<v.size(); i++){
