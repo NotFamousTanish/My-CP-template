@@ -90,7 +90,19 @@ bool sorted(vi &v){
 	}
 	return true;
 }
+void segtree(vll &a, vll &tree, int s, int e, int i){
+    if(s==e){
+        tree[i]=a[s];
+        return;
+    }
+    int mid = (s+e)/2;
+    segtree(a,tree,s,mid,2*i);
+    segtree(a,tree,mid+1,e,2*i+1);
 
+    //operation to perform on that tree
+    tree[i] = min(tree[2*i],tree[2*i+1]);
+	return;
+}
 long long _pow(long long a, long long b, long long xmod) {
      long long ans = 1;
      for (long long i = 0; i < 63; ++i) {
