@@ -25,6 +25,11 @@ void __f (const char* names, Arg1&& arg1, Args&&... args)
 	cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
 }
 
+//factorial function
+ll result[MAX + 1];
+ll fact[MAX + 1];
+void preCompute(){fact[0] = 1;result[0] = 1;for (int i = 1; i <= MAX; i++) {fact[i] = ((fact[i - 1] % MOD) * i) % MOD;result[i] = ((result[i - 1] % MOD) * (fact[i] % MOD)) % MOD;}}
+
 void segtree(vll &a, vll &tree, int s, int e, int i){
     if(s==e){
         tree[i]=a[s];
