@@ -1,0 +1,59 @@
+/*============================================================================================*/
+#include<bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+#define ll long long
+#define gcd __gcd
+#define pb push_back
+#define bhaago ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define inpv(a,n) for(int i=0; i<n; i++)cin>>a[i];
+#define all(a) a.begin(),a.end()
+#define sr(a) sort(all(a))
+#define bug(...)       __f (#__VA_ARGS__, __VA_ARGS__)
+#define pr(a) for(auto it: a)cout<<it<<" ";cout<<endl;
+#define pm(a) for(auto it: a)cout<<it.first<<" "<<it.second<<" "<<endl;
+#define vll vector<long long>
+using namespace std;
+using namespace __gnu_pbds;
+typedef tree<int,null_type, less<int>, rb_tree_tag,tree_order_statistics_node_update>pbds;
+template <typename Arg1>
+void __f (const char* name, Arg1&& arg1) { cout << name << " : " << arg1 << endl; }
+template <typename Arg1, typename... Args>
+void __f (const char* names, Arg1&& arg1, Args&&... args)
+{
+	const char* comma = strchr (names + 1, ',');
+	cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
+}
+
+void segtree(vll &a, vll &tree, int s, int e, int i){
+    if(s==e){
+        tree[i]=a[s];
+        return;
+    }
+    int mid = (s+e)/2;
+    segtree(a,tree,s,mid,2*i);
+    segtree(a,tree,mid+1,e,2*i+1);
+
+    //operation to perform on that tree
+    tree[i] = min(tree[2*i],tree[2*i+1]);
+}
+/*===========================================================================================*/
+
+//Hard Work Pays Off!... I will be there by the year End...
+void solve(){
+	
+}
+
+int32_t main(){
+	bhaago
+#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+#endif
+	clock_t z = clock();
+	int t=1;
+	cin>>t;
+	while(t--){solve();}
+	cerr<<"Run Time: "<<((double)(clock()-z)/CLOCKS_PER_SEC);
+}
