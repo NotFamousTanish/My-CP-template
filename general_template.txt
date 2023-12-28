@@ -9,8 +9,10 @@
 #define inpv(a,n) for(int i=0; i<n; i++)cin>>a[i];
 #define all(a) a.begin(),a.end()
 #define sr(a) sort(all(a))
+#define pll pair<long,long>
+#define vpp vector<pll>
 #define bug(...)       __f (#__VA_ARGS__, __VA_ARGS__)
-#define pr(a) for(auto it: a)cout<<it<<" ";cout<<endl;
+#define pr(a) for(auto it: a)cout<<it;cout<<endl;
 #define pm(a) for(auto it: a)cout<<it.first<<" "<<it.second<<" "<<endl;
 #define vll vector<long long>
 using namespace std;
@@ -24,29 +26,11 @@ void __f (const char* names, Arg1&& arg1, Args&&... args)
 	const char* comma = strchr (names + 1, ',');
 	cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
 }
-
-//factorial function
-ll result[MAX + 1];
-ll fact[MAX + 1];
-void preCompute(){fact[0] = 1;result[0] = 1;for (int i = 1; i <= MAX; i++) {fact[i] = ((fact[i - 1] % MOD) * i) % MOD;result[i] = ((result[i - 1] % MOD) * (fact[i] % MOD)) % MOD;}}
-
-void segtree(vll &a, vll &tree, int s, int e, int i){
-    if(s==e){
-        tree[i]=a[s];
-        return;
-    }
-    int mid = (s+e)/2;
-    segtree(a,tree,s,mid,2*i);
-    segtree(a,tree,mid+1,e,2*i+1);
-
-    //operation to perform on that tree
-    tree[i] = min(tree[2*i],tree[2*i+1]);
-}
 /*===========================================================================================*/
 
-//Hard Work Pays Off!... I will be there by the year End...
+//You'll get there only when You'll PRACTICE! YOU'RE CLOSE.. DON'T WASTE YOUR TIME...
 void solve(){
-	
+        
 }
 
 int32_t main(){
