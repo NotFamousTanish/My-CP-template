@@ -1,0 +1,33 @@
+// TO install MinGw 64-bit version
+
+We are using Msys2 for faster installation 
+First Download Msys from the following link
+  https://github.com/msys2/msys2-installer/releases/download/2022-10-28/msys2-x86_64-20221028.exe
+
+Install the file and Run when installed from the launcher itself or Open MSYS2 UCRT64
+
+// paste the command one after the another in MSYS2 UCRT64
+
+//To install MinGw 64-bit 
+
+  pacman -S mingw-w64-x86_64-gcc
+  
+// To install GDB compilere
+
+  pacman -S mingw-w64-x86_64-gdb
+  
+  
+ Now add the bin folder path in the environment path
+ 
+ ADD this path to Enviroment 
+
+  C:\msys64\mingw64\bin
+  
+  
+ Verify By running the following command in CMD
+ 
+ //to check g++
+ g++ --version 
+ 
+ //to check gdb
+ gdb --version
