@@ -28,7 +28,7 @@ void __f (const char* names, Arg1&& arg1, Args&&... args)
 }
 /*===========================================================================================*/
 
-//You'll get there only when You'll PRACTICE! YOU'RE CLOSE.. DON'T WASTE YOUR TIME...
+//IF I WANT RETURNS THEN I'LL HAVE TO INVEST FIRST..
 void solve(){
         
 }
