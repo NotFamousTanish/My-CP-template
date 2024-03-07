@@ -1,3 +1,4 @@
+//given that int is defined as long long
 int mod(int x, int m){
     return (x%m + m)%m;
 }
