@@ -17,13 +17,6 @@ int modSub(int a, int b, int m) {
      b %= m;
      return ((a - b + m) % m);
 }
-int invMod(int a, int m){
-    //(1/a)%m = a^(m-2)
-    return powl(a, m-2);
-}
-int modDiv(int a, int b, int m){
-    return modMul(a, invMod(b,m), m);
-}
 int modPow(int x, int y, int m){
     if(y==0){
         return 1;
@@ -36,12 +29,26 @@ int modPow(int x, int y, int m){
         return modMul(ans1, ans2, m);
     }
 }
-
-const int factN = 2e5+5;
+int invMod(int a, int m){
+    //(1/a)%m = a^(m-2)
+    return modPow(a, m-2, m);
+}
+int modDiv(int a, int b, int m){
+    return modMul(a, invMod(b,m), m);
+}
+ 
+const int factN = 2e6+5;
 int fact[factN];
 void preFact(int m){
     fact[0] = 1;
     for(int i = 1; i<=factN; i++){
         fact[i] = modMul(fact[i-1], i, m);
     }
+}
+ 
+int ncr(int n, int r, int m){
+    int den = modMul(fact[r], fact[n-r], MOD);
+    int num = fact[n];
+    int ans = modDiv(num, den, m);
+    return ans;
 }
