@@ -1,65 +1,44 @@
-struct node{
-    int sum;
-    node(){
-        sum = 0;
+class segTree {
+public:
+//CHECK FOR THE GIVEN POINTS
+//1. MODIFY THE BASE CASES ACCORDINGLY
+//2. MODIFY THE RETURN VAL ACCORDINGLY-> UPDATE, BUILD, QUERY
+//3. IN QUERY RETURN UNFAVOURABLE IN NO OVERLAPS
+//4. IN QUERY RETURN FAVOURABLE IN COMPLETE OVERLAPS
+    vector<int>seg;
+    void init(int n) {n *= 4; seg.resize(n);}
+    void build(int ind, int lo, int hi, vector<int>&arr) {
+        if (lo == hi) {
+            seg[ind] = arr[lo];
+            return;
+        }
+        int mid = (lo + hi) / 2;
+        build(2 * ind + 1, lo, mid, arr);
+        build(2 * ind + 2, mid + 1, hi, arr);
+        seg[ind] = (seg[2 * ind + 1] ^ seg[2 * ind + 2]);
+    }
+    void update(int ind, int lo, int hi, int i, int val) {
+        if (lo == hi) {
+            seg[ind] = val;
+            return;
+        }
+        int mid = (lo + hi) / 2;
+        if (i <= mid)update(2 * ind + 1, lo, mid, i, val);
+        else update(2 * ind + 2, mid + 1, hi, i, val);
+        seg[ind] = (seg[2 * ind + 1] ^ seg[2 * ind + 2]);
+    }
+    int query(int ind, int lo, int hi, int l, int r) {
+        if (r < lo || l > hi) {
+            //NO OVERLAP-> RETURN UNFAVOURABLE
+            return 0;
+        }
+        if (lo >= l && hi <= r) {
+            //COMPLETE OVERLAP-> RETURN FAVOURABLE
+            return seg[ind];
+        }
+        int mid = (lo + hi) / 2;
+        int left = query(2 * ind + 1, lo, mid, l, r);
+        int right = query(2 * ind + 2, mid + 1, hi, l, r);
+        return (left ^ right);
     }
 };
-
-node t[4*200200];
-
-node merge(node a, node b){
-    node ans;
-    ans.sum = a.sum+b.sum;
-    return ans;
-}
-
-// i -> current index;
-// [l,r] -> range represented by current node;
-// pos -> the position that is to be updated
-// [lo, hi] -> range that is to be updated
-// val -> the value that the pos has to be updated with
-
-void build(int i, int l, int r){
-    if(l == r){
-        t[i].sum = 0;
-        return;
-    }
-
-    int mid = (l+r)/2;
-    build(2*i, l, mid);
-    build((2*i)+1, mid+1, r);
-    t[i] = merge(t[2*i], t[(2*i)+1]);
-}
-
-void update(int i, int l, int r, int pos, int val){
-    //out of the range
-    if(pos < l || pos > r){
-        return;
-    }
-
-    //reached the node
-    if(l == r){
-        t[i].sum += val;
-        return;
-    }
-
-    int mid = (l+r)/2;
-    update(2*i, l, mid, pos, val);
-    update((2*i)+1, mid+1, r, pos, val);
-
-    t[i] = merge(t[2*i], t[(2*i)+1]);
-}
-
-node query(int i, int l, int r, int lo, int hi){
-    //no intersection of the segments
-    if(lo > r || hi < l){
-        return node();
-    }
-
-    if(l >= lo && r <= hi){
-        return t[i];
-    }
-    int mid = (l+r)/2;
-
-    return merge(query(2*i, l, mid, lo, hi) , query(2*i+1, mid+1, r, lo, hi));
-}
