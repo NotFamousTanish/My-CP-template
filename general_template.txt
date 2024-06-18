@@ -17,7 +17,7 @@
 #define vll vector<long long>
 using namespace std;
 using namespace __gnu_pbds;
-typedef tree<int,null_type, less<int>, rb_tree_tag,tree_order_statistics_node_update>pbds;
+typedef tree<int,null_type, less_equal<int>, rb_tree_tag,tree_order_statistics_node_update>pbds;
 template <typename Arg1>
 void __f (const char* name, Arg1&& arg1) { cout << name << " : " << arg1 << endl; }
 template <typename Arg1, typename... Args>
