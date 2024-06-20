@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+#ifndef ONLINE_JUDGE
+#define bug(...) __f (#__VA_ARGS__, __VA_ARGS__)
+template <typename Arg1>void __f (const char* name, Arg1&& arg1) { cout << name << " : " << arg1 << endl; }
+template <typename Arg1, typename... Args>void __f (const char* names, Arg1&& arg1, Args&&... args) {const char* comma = strchr (names + 1, ','); cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);}
+#else
+#define bug(...) __f (#__VA_ARGS__, __VA_ARGS__)
+template <typename Arg1>void __f (const char* name, Arg1&& arg1) {}
+template <typename Arg1, typename... Args>void __f (const char* names, Arg1&& arg1, Args&&... args) {}
+#endif
+using namespace std;
+
+
+//PASTE CLASS SOLUTION HERE
+
+
+int main() {
+	Solution* x = new Solution();
+	// vector<int>temp = {}; GIVE INPUT VECTOR
+	// int k = ; GIVE ANY OTHER INPUTS
+	// int ans = x->functionName(temp, k);
+	// cout << ans << endl;
+}
