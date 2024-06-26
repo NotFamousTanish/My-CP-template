@@ -1,36 +1,34 @@
-    string text, pattern;
-    cin >> text >> pattern;
-    int prime = 31;
-    int desiredHashValue = 0, pow = 1;
-    for (int i = 0; i < pattern.length(); i++) {
-        desiredHashValue = (desiredHashValue + (pattern[i] - 'a' + 1) * pow) % MOD;
-        pow = (pow * 31) % MOD;
-    }
-    int m = (int)text.length();
-    int powers[m];
-    pow = 1;
-    for (int i = 0; i < text.length(); i++) {
-        powers[i] = pow;
-        pow = (pow * 31) % MOD;
-    }
-    int prefixHash[m];
-    for (int i = 0; i < text.length(); i++) {
-        int pp = (i == 0) ? 0 : prefixHash[i - 1];
-        int curr = (pp + ((text[i] - 'a' + 1) * powers[i])) % MOD;
-        prefixHash[i] = curr;
-    }
-    vector<int>ans;
-    int sp = 0, ep = pattern.length() - 1;
-    while (ep < text.length()) {
-        int currentWindowPrefix = prefixHash[ep];
-        if (sp > 0) {
-            currentWindowPrefix = currentWindowPrefix - prefixHash[sp - 1];
-            if (currentWindowPrefix < 0)currentWindowPrefix += MOD;
+    vector <int> search(string pattern, string text) {
+        ll dhv = 0;
+        ll pow = 1;
+        ll prime = 31;
+        for (ll i = 0; i < pattern.length(); i++) {
+            dhv = (dhv + (pattern[i] - 'a' + 1) * pow) % MOD;
+            pow = (pow * prime) % MOD;
         }
-        int requiredHash = (desiredHashValue * powers[sp]) % MOD;
-        if (currentWindowPrefix == requiredHash) {
-            ans.push_back(sp + 1);
+        ll m = text.length();
+        ll prefixHash[m], power[m];
+        pow = 1;
+        for (ll i = 0; i < text.length(); i++) {
+            ll ph = (i == 0) ? 0 : prefixHash[i - 1];
+            ll ch = (ph + (text[i] - 'a' + 1) * pow) % MOD;
+            prefixHash[i] = ch;
+            power[i] = pow;
+            pow = (pow * prime) % MOD;
         }
-        sp++, ep++;
+        vector<int>ans;
+        int i = 0, j = pattern.length() - 1;
+        while (j < m) {
+            ll cp = prefixHash[j];
+            if (i > 0) {
+                cp = cp - prefixHash[i - 1];
+                if (cp < 0)cp += MOD;
+            }
+            ll crhv = (dhv * power[i]) % MOD;
+            if (cp == crhv) {
+                ans.push_back(i + 1);
+            }
+            i++, j++;
+        }
+        return ans;
     }
-    return ans;
