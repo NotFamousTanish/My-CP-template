@@ -1,3 +1,5 @@
+// DIJKSTRA FAILS AT NEGATIVE EDGES -> WA
+// DIJKSTRA FAILS AT NEGATIVE CYCLES -> TLE
 vector <int> dijkstra(int V, vector<vector<int>> adj[], int source){
     vector<int>distanceOfSourceFrom(V, INT_MAX);
     set<pair<int,int>>st;
