@@ -1,3 +1,4 @@
+// TIME COMPLEXITY IS: O(α(N)) where α(N) is the inverse ackermann function i.e you can relate it to somewhat close to O(1) complexity it is this much minimum time
 int parent[N];
 int size[N] = {0};
 void make(int node){
