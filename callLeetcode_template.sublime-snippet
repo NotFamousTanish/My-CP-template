@@ -12,8 +12,21 @@ template <typename Arg1, typename... Args>void __f (const char* names, Arg1&& ar
 template <typename Arg1>void __f (const char* name, Arg1&& arg1) {}
 template <typename Arg1, typename... Args>void __f (const char* names, Arg1&& arg1, Args&&... args) {}
 #endif
+#define pr(a) for(auto it: a)cout<<it<<" ";cout<<endl;
+#define pm(a) for(auto it: a)cout<<it.first<<" "<<it.second<<" "<<endl;
 using namespace std;
 
+
+/*
+
+
+			JAI SHREE RADHE (´˘ -˘ 人)
+
+			FOR THE DAYS OF ABSENCE.....
+
+			I REACH KNIGHT THIS SEMESTER
+
+*/
 
 //PASTE CLASS SOLUTION HERE
 
