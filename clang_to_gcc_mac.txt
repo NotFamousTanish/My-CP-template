@@ -1,0 +1,4 @@
+// install g++ from howebrew
+// get the version of g++
+// run this command
+sudo ln -s $(which g++-17) /usr/local/bin/g++
