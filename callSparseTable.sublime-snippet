@@ -1,0 +1,40 @@
+<snippet>
+	<content><![CDATA[
+class sparseTable {
+public:
+    //USE FOR IDEMPOTENT FUNCTIONS ONLY "f(a,a) = a"
+    static const int N = 2e5 + 10;
+    static const int K = 25;
+    int **dp = new int*[N + 1];
+
+    int f(int ff, int ss) {
+        //ONLY CHANGES ARE REQUIRED HERE
+        return min(ff, ss);
+    }
+
+    void build(vector<int>arr) {
+        for (int i = 0; i < N + 1; i++) {
+            dp[i] = new int[K + 1];
+        }
+        for (int i = 0; i < arr.size(); i++) {
+            dp[i][0] = arr[i];
+        }
+        for (int j = 1; j < K; j++) {
+            for (int i = 0; i + (1 << j) < N; i++) {
+                dp[i][j] = f(dp[i][j - 1], dp[i + (1 << (j - 1))][j - 1]);
+            }
+        }
+    }
+    int query(int L, int R) {
+        // 0 Based Indexing Arguments to be passed
+        int j = log2(R - L + 1);
+        int ans = f(dp[L][j], dp[R - (1 << j) + 1][j]);
+        return ans;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>callSparseTable</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
