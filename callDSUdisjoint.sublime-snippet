@@ -1,0 +1,31 @@
+class DSU {
+public:
+    vector<int>parent, sizes;
+    void init(int n) {
+        parent.resize(n + 1);
+        sizes.resize(n + 1);
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
+            sizes[i] = 1;
+        }
+    }
+    int finder(int node) {
+        if (parent[node] == node) {
+            return node;
+        }
+        return parent[node] = finder(parent[node]);
+    }
+
+    void merge(int node1, int node2) {
+        node1 = finder(node1);
+        node2 = finder(node2);
+
+        if (sizes[node1] > sizes[node2]) {
+            parent[node2] = node1;
+            sizes[node1] += sizes[node2];
+        } else {
+            parent[node1] = node2;
+            sizes[node2] += sizes[node1];
+        }
+    }
+};
